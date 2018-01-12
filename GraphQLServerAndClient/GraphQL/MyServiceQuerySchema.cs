@@ -1,4 +1,4 @@
-﻿using BussinessCore.Infrastructure;
+using BussinessCore.Infrastructure;
 using BussinessCore.Model;
 using GenericUnitOfWork;
 using GraphQL.Types;
@@ -9,32 +9,49 @@ using System.Threading.Tasks;
 
 namespace GenericGraphQLService.GraphQL
 {
-    public class MyServiceQuerySchema: ObjectGraphType
+  public class MyServiceQuerySchema : ObjectGraphType
+  {
+    public MyServiceQuerySchema(IUnitOfWork unitOfWork)
     {
-        public MyServiceQuerySchema(IUnitOfWork unitOfWork)
-        {
-            Name = "RootQuery";            
+      Name = "RootQuery";
 
-            Field<ClientType>(
-                "client",
-                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id", Description = "id of the client"}),
-                resolve: context =>
-                {
-                    var id = context.GetArgument<long>("id");
-                    return unitOfWork.Repository<Client>().Get(id);
-                }
-            );
+      Field<ClientType>(
+          "client",
+          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id", Description = "id of the client" }),
+          resolve: context =>
+          {
+            var id = context.GetArgument<long>("id");
+            return unitOfWork.Repository<Client>().Get(id);
+          }
+      );
 
-            Field<ProductType>(
+      Field<ListGraphType<ClientType>>(
+          "clients",
+          resolve: context =>
+          {
+            return unitOfWork.Repository<Client>().GetAll();
+          }
+      );
+
+
+      Field<ProductType>(
                 "product",
                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id", Description = "id of the product" }),
                 resolve: context =>
                 {
-                    var id = context.GetArgument<long>("id");
-                    return unitOfWork.Repository<Product>().Get(id);
+                  var id = context.GetArgument<long>("id");
+                  return unitOfWork.Repository<Product>().Get(id);
                 }
             );
-            
-        }
+
+      Field<ListGraphType<ProductType>>(
+                "products",
+                resolve: context =>
+                {
+                  return unitOfWork.Repository<Product>().GetAll();
+                }
+            );
+
     }
+  }
 }

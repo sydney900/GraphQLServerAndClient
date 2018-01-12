@@ -35,7 +35,6 @@ namespace GenericGraphQLService.Controllers
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] GraphQlQuery query)
-    //public async Task<IActionResult> Post(GraphQlQuery query)
     {
       if (query == null) { throw new ArgumentNullException(nameof(query)); }
 

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\models\client.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="GraphiQL" Version="1.1.0" />
     <PackageReference Include="GraphQL" Version="0.17.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
@@ -27,6 +31,10 @@
     <Reference Include="GenericUnitOfWork">
       <HintPath>..\GenericUnitOfWorkDll\netcoreapp2.0\GenericUnitOfWork.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\models\client.ts" />
   </ItemGroup>
 
   <ItemGroup>

@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../ClientApp/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{ title }}!\n  </h1>\n</div>\n<h2>Here are some links to help you start: </h2>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <h3>\r\n    Clients\r\n  </h3>\r\n</div>\r\n\r\n<ul *ngFor=\"let entry of clients | async | select: 'clients'\" calss=\"mdl-list\">\r\n  <li class=\"mdl-list__item\">{{entry.clientName}}</li>\r\n</ul>\r\n\r\n"
 
 /***/ }),
 
@@ -49,8 +49,8 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_apollo_angular__ = __webpack_require__("../../../../apollo-angular/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_graphql_tag__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__clientGraphql_gqlQueryClientAndProduct__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlQueryClientAndProduct.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__clientGraphql_gqlQueryClients__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlQueryClients.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -63,21 +63,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var QueryClientAndProduct = (_a = ["query queryClientAndProduct($clientId: String!, $prodId: String!) {\n      client(id: $clientId) {\n        clientName \n        products {\n          name\n        }\n      }, \n      product(id:$prodId) {\n        name\n      }\n    }\n"], _a.raw = ["query queryClientAndProduct($clientId: String!, $prodId: String!) {\n      client(id: $clientId) {\n        clientName \n        products {\n          name\n        }\n      }, \n      product(id:$prodId) {\n        name\n      }\n    }\n"], __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default()(_a));
+
 var AppComponent = (function () {
     function AppComponent(apollo) {
         this.apollo = apollo;
         this.title = 'app';
     }
     AppComponent.prototype.ngOnInit = function () {
+        this.clients = this.apollo.watchQuery({
+            query: __WEBPACK_IMPORTED_MODULE_3__clientGraphql_gqlQueryClients__["a" /* default */]
+        }).valueChanges;
         this.apollo.watchQuery({
-            query: QueryClientAndProduct,
+            query: __WEBPACK_IMPORTED_MODULE_2__clientGraphql_gqlQueryClientAndProduct__["a" /* default */],
             variables: {
                 clientId: '1',
                 prodId: '1'
             }
-        })
-            .valueChanges
+        }).valueChanges
             .subscribe(function (_a) {
             var data = _a.data;
             console.log(data);
@@ -94,7 +96,6 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 
-var _a;
 
 
 /***/ }),
@@ -156,6 +157,32 @@ var AppModule = (function () {
     return AppModule;
 }());
 
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/clientGraphql/gqlQueryClientAndProduct.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_graphql_tag__);
+
+/* harmony default export */ __webpack_exports__["a"] = (_a = ["query queryClientAndProduct($clientId: String!, $prodId: String!) {\n      client(id: $clientId) {\n        clientName \n        products {\n          name\n        }\n      }, \n      product(id:$prodId) {\n        name\n      }\n    }\n"], _a.raw = ["query queryClientAndProduct($clientId: String!, $prodId: String!) {\n      client(id: $clientId) {\n        clientName \n        products {\n          name\n        }\n      }, \n      product(id:$prodId) {\n        name\n      }\n    }\n"], __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default()(_a));
+var _a;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/clientGraphql/gqlQueryClients.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_graphql_tag__);
+
+/* harmony default export */ __webpack_exports__["a"] = (_a = ["{\n  clients {\n    id\n    clientName\n    clientPassWord\n    email\n  }\n}"], _a.raw = ["{\n  clients {\n    id\n    clientName\n    clientPassWord\n    email\n  }\n}"], __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default()(_a));
+var _a;
 
 
 /***/ }),

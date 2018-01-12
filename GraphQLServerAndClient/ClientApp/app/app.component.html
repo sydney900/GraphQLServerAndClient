@@ -1,8 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <h3>
+    Clients
+  </h3>
 </div>
-<h2>Here are some links to help you start: </h2>
+
+<ul *ngFor="let entry of clients | async | select: 'clients'" calss="mdl-list">
+  <li class="mdl-list__item">{{entry.clientName}}</li>
+</ul>
 

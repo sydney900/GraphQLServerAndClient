@@ -12,7 +12,7 @@ namespace GenericGraphQLService.GraphQL
         {
             Name = "ClientInput";
             Field<NonNullGraphType<StringGraphType>>("clientName");
-            Field<NonNullGraphType<StringGraphType>>("clientPassword");
+            Field<NonNullGraphType<StringGraphType>>("clientPassWord");
             Field<StringGraphType>("email");
         }
     }
