@@ -5,18 +5,39 @@ import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
+import { CreateClientComponent } from './clients/create-client/create-client.component';
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+
+const appRoutes: Routes = [
+  { path: 'main', component: AppComponent, data: { title: 'Clients List' } },
+  { path: 'create-client', component: CreateClientComponent },
+  {
+    path: '',
+    redirectTo: '/main',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateClientComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule, // provides HttpClient for HttpLink
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    RouterModule.forRoot(
+      appRoutes,
+      //{ enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

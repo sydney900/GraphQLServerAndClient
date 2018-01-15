@@ -26,6 +26,17 @@ namespace GenericGraphQLService.GraphQL
           }
       );
 
+      Field<ListGraphType<ClientType>>(
+        "deleteClient",
+          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }),
+          resolve: context =>
+          {
+            var id = context.GetArgument<long>("id");
+            unitOfWork.Repository<Client>().Delete(id);
+            return true;
+          }
+        );
+
       Field<ProductType>(
           "addProduct",
           arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ProductInputType>> { Name = "product"}),
@@ -36,6 +47,17 @@ namespace GenericGraphQLService.GraphQL
             return true;
           }
       );
+
+      Field<ListGraphType<ProductType>>(
+        "deleteProduct",
+          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }),
+          resolve: context =>
+          {
+            var id = context.GetArgument<long>("id");
+            unitOfWork.Repository<Product>().Delete(id);
+            return true;
+          }
+        );
 
     }
   }
