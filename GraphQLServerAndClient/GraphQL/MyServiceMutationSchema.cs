@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GenericGraphQLService.GraphQL
 {
-  public class MyServiceMutationSchema : ObjectGraphType
+  public class MyServiceMutationSchema : ObjectGraphType<object>
   {
     public MyServiceMutationSchema(IUnitOfWork unitOfWork)
     {
@@ -17,45 +17,47 @@ namespace GenericGraphQLService.GraphQL
 
       Field<ClientType>(
           "addClient",
-          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ClientInputType>> { Name = "client" }),
+          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ClientInputType>> { Name = "clientInput" }),
           resolve: context =>
           {
-            var client = context.GetArgument<Client>("client");
+            var client = context.GetArgument<Client>("clientInput");
             unitOfWork.Repository<Client>().Insert(client);
-            return true;
+            unitOfWork.SaveChanges();
+            return client;
           }
       );
 
-      Field<ListGraphType<ClientType>>(
+      Field<ClientType>(
         "deleteClient",
           arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }),
           resolve: context =>
           {
             var id = context.GetArgument<long>("id");
             unitOfWork.Repository<Client>().Delete(id);
-            return true;
+            unitOfWork.SaveChanges();
+            return null;
           }
         );
 
       Field<ProductType>(
           "addProduct",
-          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ProductInputType>> { Name = "product"}),
+          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ProductInputType>> { Name = "product" }),
           resolve: context =>
           {
             var product = context.GetArgument<Product>("id");
             unitOfWork.Repository<Product>().Insert(product);
-            return true;
+            return unitOfWork.SaveChanges();
           }
       );
 
-      Field<ListGraphType<ProductType>>(
+      Field<ProductType>(
         "deleteProduct",
           arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id" }),
           resolve: context =>
           {
             var id = context.GetArgument<long>("id");
             unitOfWork.Repository<Product>().Delete(id);
-            return true;
+            return unitOfWork.SaveChanges();
           }
         );
 

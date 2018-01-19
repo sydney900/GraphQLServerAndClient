@@ -17,7 +17,7 @@ webpackEmptyAsyncContext.id = "../../../../../ClientApp/$$_lazy_route_resource l
 
 /***/ }),
 
-/***/ "../../../../../ClientApp/app/app.component.css":
+/***/ "../../../../../ClientApp/app/Clients/clients-list/clients-list.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -35,18 +35,18 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../ClientApp/app/app.component.html":
+/***/ "../../../../../ClientApp/app/Clients/clients-list/clients-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <h3>\r\n    Clients\r\n  </h3>\r\n</div>\r\n\r\n<ul *ngFor=\"let entry of clients | async | select: 'clients'\" calss=\"mdl-list\">\r\n  <li class=\"mdl-list__item\">\r\n    <i class=\"material-icons\">person</i>\r\n    {{entry.clientName}}\r\n    <button class=\"mdl-button mdl-js-button mdl-button--fab mdl-button--colored blue\" (click)=\"onDeleteClient(entry.id)\">\r\n      <i class=\"material-icons\">delete</i>\r\n    </button>\r\n  </li>\r\n</ul>\r\n<button class=\"mdl-button mdl-js-button mdl-button--fab mdl-button--colored right blue\" (click)=\"onAddClient()\">\r\n  <i class=\"material-icons\">add</i>\r\n</button>\r\n\r\n\r\n"
+module.exports = "\r\n<div style=\"text-align:center\">\r\n  <h3>\r\n    Clients\r\n  </h3>\r\n</div>\r\n\r\n<mat-list>\r\n  <mat-list-item *ngFor=\"let entry of clients | async | select: 'clients'\">\r\n    <i class=\"material-icons\">person</i>\r\n    <div>\r\n      <h5 matLine>\r\n        {{entry.clientName}}\r\n      </h5>\r\n      <p matLine>\r\n        <span> {{entry.email}} </span>\r\n      </p>\r\n    </div>\r\n    <button (click)=\"onDeleteClient(entry.id)\">\r\n      <i class=\"material-icons\">delete</i>\r\n    </button>\r\n  </mat-list-item>\r\n</mat-list>\r\n\r\n<button (click)=\"onAddClient()\" mat-icon-button>\r\n  <i class=\"material-icons\">add</i>\r\n</button>\r\n\r\n\r\n"
 
 /***/ }),
 
-/***/ "../../../../../ClientApp/app/app.component.ts":
+/***/ "../../../../../ClientApp/app/Clients/clients-list/clients-list.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientsListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_apollo_angular__ = __webpack_require__("../../../../apollo-angular/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
@@ -67,14 +67,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var mutation = (_a = ["\nmutation DeleteClient($id: ID) {\n  deleteClient(id: $id)\n}\n"], _a.raw = ["\nmutation DeleteClient($id: ID) {\n  deleteClient(id: $id)\n}\n"], __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default()(_a));
-var AppComponent = (function () {
-    function AppComponent(apollo, router) {
+var mutation = (_a = ["\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id)\n}\n"], _a.raw = ["\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id)\n}\n"], __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default()(_a));
+var ClientsListComponent = (function () {
+    function ClientsListComponent(apollo, router, route) {
         this.apollo = apollo;
         this.router = router;
-        this.title = 'app';
+        this.route = route;
     }
-    AppComponent.prototype.ngOnInit = function () {
+    ClientsListComponent.prototype.ngOnInit = function () {
         this.clients = this.apollo.watchQuery({
             query: __WEBPACK_IMPORTED_MODULE_4__clientGraphql_gqlQueryClients__["a" /* default */]
         }).valueChanges;
@@ -89,12 +89,12 @@ var AppComponent = (function () {
         //    console.log(data);
         //  });
     };
-    AppComponent.prototype.onAddClient = function () {
+    ClientsListComponent.prototype.onAddClient = function () {
         //navigate to creat client
         console.log("navigate to creat client");
         this.router.navigate(["/create-client"]);
     };
-    AppComponent.prototype.onDeleteClient = function (id) {
+    ClientsListComponent.prototype.onDeleteClient = function (id) {
         //delete the client
         console.log("delete the client");
         this.apollo.mutate({
@@ -104,18 +104,80 @@ var AppComponent = (function () {
             }
         });
     };
+    ClientsListComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-clients-list',
+            template: __webpack_require__("../../../../../ClientApp/app/Clients/clients-list/clients-list.component.html"),
+            styles: [__webpack_require__("../../../../../ClientApp/app/Clients/clients-list/clients-list.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_apollo_angular__["a" /* Apollo */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]])
+    ], ClientsListComponent);
+    return ClientsListComponent;
+}());
+
+var _a;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/app.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"sourceMap\":false}!../../../material/prebuilt-themes/indigo-pink.css"), "");
+
+// module
+exports.push([module.i, "\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/app.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<router-outlet></router-outlet>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/app.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AppComponent = (function () {
+    function AppComponent() {
+        this.title = 'app';
+    }
+    AppComponent.prototype.ngOnInit = function () {
+    };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("../../../../../ClientApp/app/app.component.html"),
             styles: [__webpack_require__("../../../../../ClientApp/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_apollo_angular__["a" /* Apollo */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [])
     ], AppComponent);
     return AppComponent;
 }());
 
-var _a;
 
 
 /***/ }),
@@ -132,9 +194,13 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_apollo_angular_link_http__ = __webpack_require__("../../../../apollo-angular-link-http/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_apollo_cache_inmemory__ = __webpack_require__("../../../../apollo-cache-inmemory/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__("../../../../../ClientApp/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__clients_create_client_create_client_component__ = __webpack_require__("../../../../../ClientApp/app/clients/create-client/create-client.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__common_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../ClientApp/app/common/page-not-found/page-not-found.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/esm5/animations.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__mat_module__ = __webpack_require__("../../../../../ClientApp/app/mat.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__("../../../../../ClientApp/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__clients_create_client_create_client_component__ = __webpack_require__("../../../../../ClientApp/app/clients/create-client/create-client.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__common_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../ClientApp/app/common/page-not-found/page-not-found.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Clients_clients_list_clients_list_component__ = __webpack_require__("../../../../../ClientApp/app/Clients/clients-list/clients-list.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -154,15 +220,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
 var appRoutes = [
-    { path: 'main', component: __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */], data: { title: 'Clients List' } },
-    { path: 'create-client', component: __WEBPACK_IMPORTED_MODULE_8__clients_create_client_create_client_component__["a" /* CreateClientComponent */] },
+    { path: 'main', component: __WEBPACK_IMPORTED_MODULE_13__Clients_clients_list_clients_list_component__["a" /* ClientsListComponent */], data: { title: 'Clients List' } },
+    { path: 'create-client', component: __WEBPACK_IMPORTED_MODULE_11__clients_create_client_create_client_component__["a" /* CreateClientComponent */] },
     {
         path: '',
         redirectTo: '/main',
         pathMatch: 'full'
     },
-    { path: '**', component: __WEBPACK_IMPORTED_MODULE_9__common_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
+    { path: '**', component: __WEBPACK_IMPORTED_MODULE_12__common_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
 ];
 var AppModule = (function () {
     function AppModule(apollo, httpLink) {
@@ -174,21 +244,26 @@ var AppModule = (function () {
         });
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["K" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__clients_create_client_create_client_component__["a" /* CreateClientComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__common_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */]
+                __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__clients_create_client_create_client_component__["a" /* CreateClientComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__common_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__Clients_clients_list_clients_list_component__["a" /* ClientsListComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_3_apollo_angular__["b" /* ApolloModule */],
                 __WEBPACK_IMPORTED_MODULE_4_apollo_angular_link_http__["b" /* HttpLinkModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* RouterModule */].forRoot(appRoutes)
+                __WEBPACK_IMPORTED_MODULE_6__angular_router__["c" /* RouterModule */].forRoot(appRoutes),
+                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["f" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["k" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_platform_browser_animations__["a" /* NoopAnimationsModule */],
+                __WEBPACK_IMPORTED_MODULE_9__mat_module__["a" /* MaterialModule */]
             ],
             providers: [],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* AppComponent */]]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_apollo_angular__["a" /* Apollo */],
             __WEBPACK_IMPORTED_MODULE_4_apollo_angular_link_http__["a" /* HttpLink */]])
@@ -208,7 +283,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".clientform {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n\r\n  .clientform > * {\r\n    width: 100%;\r\n  }\r\n", ""]);
 
 // exports
 
@@ -221,7 +296,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../ClientApp/app/clients/create-client/create-client.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Create a new client</h3>\r\n"
+module.exports = "<form  class=\"clientform\" [formGroup]=\"clientForm\" (ngSubmit)=\"onSubmit(clientForm.value)\">\r\n\r\n  <mat-form-field>\r\n    <input matInput placeholder=\"Client Name\" formControlName=\"clientName\">\r\n    <mat-error *ngIf=\"clientForm.get('clientName')?.invalid\">Client name is required</mat-error>\r\n  </mat-form-field>\r\n\r\n  <mat-form-field>\r\n    <input matInput placeholder=\"Client Password\" formControlName=\"clientPassword\" min=\"5\">\r\n    <mat-error *ngIf=\"clientForm.get('clientPassword')?.invalid\">Please input at least 5 characters</mat-error>\r\n  </mat-form-field>\r\n\r\n  <mat-form-field>\r\n    <input matInput placeholder=\"Enter your email\" formControlName=\"email\" required>\r\n    <mat-error *ngIf=\"clientForm.get('email')?.invalid\">Please input correct email</mat-error>\r\n  </mat-form-field>\r\n\r\n  <input type=\"submit\" value=\"Create\" />\r\n\r\n</form>\r\n\r\n"
 
 /***/ }),
 
@@ -231,6 +306,11 @@ module.exports = "<h3>Create a new client</h3>\r\n"
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateClientComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_apollo_angular__ = __webpack_require__("../../../../apollo-angular/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_graphql_tag__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_client__ = __webpack_require__("../../../../../ClientApp/app/models/client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -241,10 +321,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
+var mutation = (_a = ["\nmutation AddClient($clientInput: ClientInput) {\n  addClient(clientInput: $clientInput) {\n     id\n     clientName\n  }\n}\n"], _a.raw = ["\nmutation AddClient($clientInput: ClientInput) {\n  addClient(clientInput: $clientInput) {\n     id\n     clientName\n  }\n}\n"], __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default()(_a));
 var CreateClientComponent = (function () {
-    function CreateClientComponent() {
+    function CreateClientComponent(fb, apollo) {
+        this.fb = fb;
+        this.apollo = apollo;
     }
     CreateClientComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.client = new __WEBPACK_IMPORTED_MODULE_4__models_client__["a" /* Client */](null, "", "", "");
+        this.clientForm = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["d" /* FormGroup */]({
+            clientName: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormControl */]("", {
+                validators: __WEBPACK_IMPORTED_MODULE_3__angular_forms__["l" /* Validators */].required,
+                updateOn: 'submit'
+            }),
+            clientPassword: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormControl */]("", {
+                validators: [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["l" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["l" /* Validators */].min(5)],
+                updateOn: 'submit'
+            }),
+            email: new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["c" /* FormControl */]("", {
+                validators: __WEBPACK_IMPORTED_MODULE_3__angular_forms__["l" /* Validators */].email,
+                updateOn: 'submit'
+            })
+        });
+        this.clientForm.valueChanges.subscribe(function (f) {
+            _this.client.clientName = f.clientName;
+            _this.client.clientPassword = f.clientPassword;
+            _this.client.email = f.email;
+        });
+    };
+    CreateClientComponent.prototype.onSubmit = function (fClient) {
+        this.apollo.mutate({
+            mutation: mutation,
+            variables: {
+                clientInput: {
+                    clientName: fClient.clientName,
+                    clientPassWord: fClient.clientPassword,
+                    email: fClient.email
+                }
+            }
+        });
     };
     CreateClientComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -252,11 +372,12 @@ var CreateClientComponent = (function () {
             template: __webpack_require__("../../../../../ClientApp/app/clients/create-client/create-client.component.html"),
             styles: [__webpack_require__("../../../../../ClientApp/app/clients/create-client/create-client.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_apollo_angular__["a" /* Apollo */]])
     ], CreateClientComponent);
     return CreateClientComponent;
 }());
 
+var _a;
 
 
 /***/ }),
@@ -322,6 +443,56 @@ var PageNotFoundComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../ClientApp/app/mat.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MaterialModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var MaterialModule = (function () {
+    function MaterialModule() {
+    }
+    MaterialModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatListModule */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatListModule */]],
+        })
+    ], MaterialModule);
+    return MaterialModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/models/client.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Client; });
+var Client = (function () {
+    function Client(id, clientName, clientPassword, email) {
+        this.id = id;
+        this.clientName = clientName;
+        this.clientPassword = clientPassword;
+        this.email = email;
+    }
+    return Client;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../ClientApp/clientGraphql/gqlQueryClients.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -358,16 +529,19 @@ var environment = {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/esm5/platform-browser-dynamic.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("../../../../../ClientApp/app/app.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../ClientApp/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hammerjs__ = __webpack_require__("../../../../hammerjs/hammer.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hammerjs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__("../../../../../ClientApp/app/app.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../ClientApp/environments/environment.ts");
 
 
 
 
-if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* enableProdMode */])();
+
+if (__WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].production) {
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_17" /* enableProdMode */])();
 }
-Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
+Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 
 

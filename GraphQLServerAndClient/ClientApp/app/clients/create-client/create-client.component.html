@@ -1,1 +1,21 @@
-<h3>Create a new client</h3>
+<form  class="clientform" [formGroup]="clientForm" (ngSubmit)="onSubmit(clientForm.value)">
+
+  <mat-form-field>
+    <input matInput placeholder="Client Name" formControlName="clientName">
+    <mat-error *ngIf="clientForm.get('clientName')?.invalid">Client name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Client Password" formControlName="clientPassword" min="5">
+    <mat-error *ngIf="clientForm.get('clientPassword')?.invalid">Please input at least 5 characters</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Enter your email" formControlName="email" required>
+    <mat-error *ngIf="clientForm.get('email')?.invalid">Please input correct email</mat-error>
+  </mat-form-field>
+
+  <input type="submit" value="Create" />
+
+</form>
+

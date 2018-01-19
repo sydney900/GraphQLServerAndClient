@@ -1,4 +1,4 @@
-﻿using BussinessCore.Infrastructure;
+using BussinessCore.Infrastructure;
 using BussinessCore.Model;
 using GenericUnitOfWork;
 using GenericUnitOfWork.Base;

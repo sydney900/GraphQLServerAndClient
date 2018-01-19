@@ -1,0 +1,45 @@
+<div id="clientform">
+
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Create a new client</h2>
+    </div>
+
+    <div class="mdl-card__supporting-text">
+      <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
+
+        <div id="namepassword">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="clientName" name="clientName" required [(ngModel)]="client.clientName" />
+            <label class="mdl-textfield__label" for="clientName">Client Name</label>
+            <span class="mdl-textfield__error">Name is required!</span>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" id="clientPassword" type="password" name="clientPassword" required [(ngModel)]="client.clientPassword" />
+            <label class="mdl-textfield__label" for="clientPassword">Password</label>
+            <span class="mdl-textfield__error">Password is required!</span>
+          </div>
+        </div>
+
+        <div id="contact">
+          <div id="email">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="email" name="email" required [(ngModel)]="client.email" />
+              <label class="mdl-textfield__label" for="email">E-mail</label>
+              <span class="mdl-textfield__error">Enter a valid email!</span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <div id="next">
+    <button class="mdl-button mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">send</i>
+      Submit
+    </button>
+  </div>
+
+</div>

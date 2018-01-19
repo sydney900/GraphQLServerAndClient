@@ -1,0 +1,8 @@
+.clientform {
+  display: flex;
+  flex-direction: column;
+}
+
+  .clientform > * {
+    width: 100%;
+  }

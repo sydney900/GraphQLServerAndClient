@@ -66,9 +66,15 @@
       }
     },
     "@angular/animations": {
-      "version": "5.1.3",
-      "resolved": "https://registry.npmjs.org/@angular/animations/-/animations-5.1.3.tgz",
-      "integrity": "sha1-OvMHO/3+rGHX5gWCV7OxnJcYOpY=",
+      "version": "5.2.0",
+      "resolved": "https://registry.npmjs.org/@angular/animations/-/animations-5.2.0.tgz",
+      "integrity": "sha512-JLR42YHiJppO4ruAkFxgbzghUDtHkXHkKPM8udd2qyt16T7e1OX7EEOrrmldUu59CC56tZnJ/32p4SrYmxyBSA==",
+      "requires": {
+        "tslib": "1.7.1"
+      }
+    },
+    "@angular/cdk": {
+      "version": "github:angular/cdk-builds#7adfdc1a210988b543ed7fa26212b686318e0d67",
       "requires": {
         "tslib": "1.7.1"
       }
@@ -837,6 +843,12 @@
       "integrity": "sha1-tV8pWUMTPjOUD/cea7CvqT1/TTY=",
       "dev": true
     },
+    "@angular/material": {
+      "version": "github:angular/material2-builds#fa8199f7a9ed595b01587fc69a59c173a668c28a",
+      "requires": {
+        "tslib": "1.7.1"
+      }
+    },
     "@angular/platform-browser": {
       "version": "5.1.3",
       "resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-5.1.3.tgz",
@@ -885,7 +897,7 @@
     "@types/async": {
       "version": "2.0.46",
       "resolved": "https://registry.npmjs.org/@types/async/-/async-2.0.46.tgz",
-      "integrity": "sha512-G4pYI5fcrmy6/NpTUHxTV8KOJgt7xO4jU7Itx3hA+AsBiECf78vFIJdRSWM6pHIskmKfCmJ0zGVbQJuKUooEQg==",
+      "integrity": "sha1-8TpsM2plgrldDAJp55a3CUiP1U0=",
       "optional": true
     },
     "@types/jasmine": {
@@ -924,7 +936,7 @@
     "@types/zen-observable": {
       "version": "0.5.3",
       "resolved": "https://registry.npmjs.org/@types/zen-observable/-/zen-observable-0.5.3.tgz",
-      "integrity": "sha512-aDvGDAHcVfUqNmd8q4//cHAP+HGxsbChbBbuk3+kMVk5TTxfWLpQWvVN3+UPjohLnwMYN7jr6BWNn2cYNqdm7g=="
+      "integrity": "sha1-kbcoWZVE77tzhti2YzaTo8LnreU="
     },
     "abbrev": {
       "version": "1.1.1",
@@ -1160,17 +1172,17 @@
     "apollo-angular": {
       "version": "1.0.0",
       "resolved": "https://registry.npmjs.org/apollo-angular/-/apollo-angular-1.0.0.tgz",
-      "integrity": "sha512-H+OVgTP6V/tUG7ea2mo87fIerawcuQ38638h+ABspUJcDZ8aG6UZOl3v7gFtdEqoNYCB+3LVbJa76ZvLNxUEcQ=="
+      "integrity": "sha1-UqKSQ3rPA53nZY6vExuKHYjY8Nc="
     },
     "apollo-angular-link-http": {
       "version": "1.0.1",
       "resolved": "https://registry.npmjs.org/apollo-angular-link-http/-/apollo-angular-link-http-1.0.1.tgz",
-      "integrity": "sha512-BSNyXDwg0lTeveJOf9K7aPJ41rPJ/npBWPwfdN8ljnh8c2Xl/CALu3GHCLRWechBFSvJ5HR0q3mgfMR+XkUd9Q=="
+      "integrity": "sha1-IwpIgpX3BLWpX8zIMf3wsUsGjSI="
     },
     "apollo-cache": {
       "version": "1.1.0",
       "resolved": "https://registry.npmjs.org/apollo-cache/-/apollo-cache-1.1.0.tgz",
-      "integrity": "sha512-ILs1/GCyAv8RRMansOqpENnsJMCc1w6UQKVY6vTxJBpUDpGO6B6/UbIaWM0esat9cf92a7yx13/BoauFRzwqzw==",
+      "integrity": "sha1-KBtqD7bKLFvOaYJWQvaF3pLQXzw=",
       "requires": {
         "apollo-utilities": "1.0.4"
       }
@@ -1178,7 +1190,7 @@
     "apollo-cache-inmemory": {
       "version": "1.1.5",
       "resolved": "https://registry.npmjs.org/apollo-cache-inmemory/-/apollo-cache-inmemory-1.1.5.tgz",
-      "integrity": "sha512-Gy9g4RZUfIJwxaZuMF3ZqplYaiFSfgJYmepYTIP+zL+9dqV1Er8EIICJqVlc4T2uWXHQ9U01iK5Hu1g9pV85tg==",
+      "integrity": "sha1-dBETZ/1Zyu4SAZfvZj3LJRaXEwA=",
       "requires": {
         "apollo-cache": "1.1.0",
         "apollo-utilities": "1.0.4",
@@ -1188,7 +1200,7 @@
     "apollo-client": {
       "version": "2.2.0",
       "resolved": "https://registry.npmjs.org/apollo-client/-/apollo-client-2.2.0.tgz",
-      "integrity": "sha512-PSocHEbRoubHIV+GD/bHMACFstbEv9a4FLgu41d2djpwAIIiT37qgnfLbnvY7BlME0vKc7HIV6sYjLY3xnjY4Q==",
+      "integrity": "sha1-4ixLo6PAGuxtyRal28DznFjSd/s=",
       "requires": {
         "@types/async": "2.0.46",
         "@types/zen-observable": "0.5.3",
@@ -1203,14 +1215,14 @@
         "symbol-observable": {
           "version": "1.1.0",
           "resolved": "https://registry.npmjs.org/symbol-observable/-/symbol-observable-1.1.0.tgz",
-          "integrity": "sha512-dQoid9tqQ+uotGhuTKEY11X4xhyYePVnqGSoSm3OGKh2E8LZ6RPULp1uXTctk33IeERlrRJYoVSBglsL05F5Uw=="
+          "integrity": "sha1-XGj9jVQRXZ37cqhHIFSSIujbmzI="
         }
       }
     },
     "apollo-link": {
       "version": "1.0.7",
       "resolved": "https://registry.npmjs.org/apollo-link/-/apollo-link-1.0.7.tgz",
-      "integrity": "sha512-oHzvpIDEy4UCNdbOw42wtOK1zOzdMrt4ulYyon24zT24MjicezTmXqJh2mR6whTl8RiUDLDY4ByusdKKXdcqHw==",
+      "integrity": "sha1-Qs04pzeDMvw+QaIU/2puXnA6VW8=",
       "requires": {
         "@types/zen-observable": "0.5.3",
         "apollo-utilities": "1.0.4",
@@ -1220,14 +1232,14 @@
         "zen-observable": {
           "version": "0.6.1",
           "resolved": "https://registry.npmjs.org/zen-observable/-/zen-observable-0.6.1.tgz",
-          "integrity": "sha512-DKjFTL7siVLIUMZOFZ0alqMEdTsXPUxoCZzrvB2tdWEVN/6606Qh1nCfSTCAOZMrtcPzzFI3BXmwBKLAew52NA=="
+          "integrity": "sha1-AdvtO8jQLL6e4REsg+BMgH9kckQ="
         }
       }
     },
     "apollo-link-dedup": {
       "version": "1.0.5",
       "resolved": "https://registry.npmjs.org/apollo-link-dedup/-/apollo-link-dedup-1.0.5.tgz",
-      "integrity": "sha512-KxBC8RapBctNX7o/bxMi5LdLA5VhD9ng8Td0tG+zlib5WV5wMERBCclgd9LqRdt1CkxJ/gsrTfBh38LcVhpWvg==",
+      "integrity": "sha1-HCE9frvkjnSwFv/6zX5qU9wwnjI=",
       "requires": {
         "apollo-link": "1.0.7"
       }
@@ -1235,7 +1247,7 @@
     "apollo-utilities": {
       "version": "1.0.4",
       "resolved": "https://registry.npmjs.org/apollo-utilities/-/apollo-utilities-1.0.4.tgz",
-      "integrity": "sha512-QnxSxRuJLCpa91P2Tzi3PCdpPydpBEawsHedr/hW7QrgOpn1fOicxgVrzhxt/au9rXSopwyDTBsGa7wEvz+DQQ=="
+      "integrity": "sha1-VgAJ6lVBuf3E7gfrsXFO4xmnbBU="
     },
     "app-root-path": {
       "version": "2.0.1",
@@ -4416,7 +4428,7 @@
     "fsevents": {
       "version": "1.1.3",
       "resolved": "https://registry.npmjs.org/fsevents/-/fsevents-1.1.3.tgz",
-      "integrity": "sha512-WIr7iDkdmdbxu/Gh6eKEZJL6KPE74/5MEsf2whTOFNxbIoIixogroLdKYqB6FDav4Wavh/lZdzzd3b2KxIXC5Q==",
+      "integrity": "sha1-EfgjGPX+e7LNIpZaEI6TBiCCFtg=",
       "dev": true,
       "optional": true,
       "requires": {
@@ -5507,7 +5519,7 @@
     "graphql": {
       "version": "0.12.3",
       "resolved": "https://registry.npmjs.org/graphql/-/graphql-0.12.3.tgz",
-      "integrity": "sha512-Hn9rdu4zacplKXNrLCvR8YFiTGnbM4Zw/UH8FDmzBDsH7ou40lSNH4tIlsxcYnz2TGNVJCpu1WxCM23yd6kzhA==",
+      "integrity": "sha1-EWaEWLvigmHA3LbiZfUVunn2zgc=",
       "requires": {
         "iterall": "1.1.3"
       }
@@ -5515,7 +5527,7 @@
     "graphql-anywhere": {
       "version": "4.1.1",
       "resolved": "https://registry.npmjs.org/graphql-anywhere/-/graphql-anywhere-4.1.1.tgz",
-      "integrity": "sha512-CMbuqNbp6nfHfOHswrDuEed+MxDSnLppHKjjte447P6fllqZi69D2bS/3QSfK/KONSgvpk3ptxNi4fR6WQFcSQ==",
+      "integrity": "sha1-Z5JLZ7BT0aI7ww0OTI25Q8HXkag=",
       "requires": {
         "apollo-utilities": "1.0.4"
       }
@@ -5524,6 +5536,11 @@
       "version": "2.6.1",
       "resolved": "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.6.1.tgz",
       "integrity": "sha1-R4jVCfbilgfZR/xHpAxOGPc200o="
+    },
+    "hammerjs": {
+      "version": "2.0.8",
+      "resolved": "https://registry.npmjs.org/hammerjs/-/hammerjs-2.0.8.tgz",
+      "integrity": "sha1-BO93hiz/K7edMPdpIJWTAiK/YPE="
     },
     "handle-thing": {
       "version": "1.2.5",
@@ -6727,7 +6744,7 @@
     "iterall": {
       "version": "1.1.3",
       "resolved": "https://registry.npmjs.org/iterall/-/iterall-1.1.3.tgz",
-      "integrity": "sha512-Cu/kb+4HiNSejAPhSaN1VukdNTTi/r4/e+yykqjlG/IW+1gZH5b4+Bq3whDX4tvbYugta3r8KTMUiqT3fIGxuQ=="
+      "integrity": "sha1-HLv/liBAVt3mZW4u0uIibQ5tcsk="
     },
     "jasmine": {
       "version": "2.8.0",
@@ -12960,7 +12977,7 @@
     "zen-observable": {
       "version": "0.7.1",
       "resolved": "https://registry.npmjs.org/zen-observable/-/zen-observable-0.7.1.tgz",
-      "integrity": "sha512-OI6VMSe0yeqaouIXtedC+F55Sr6r9ppS7+wTbSexkYdHbdt4ctTuPNXP/rwm7GTVI63YBc+EBT0b0tl7YnJLRg=="
+      "integrity": "sha1-+EB1wO4IVZTTVm4dZFQgfxJkEbM="
     },
     "zone.js": {
       "version": "0.8.19",

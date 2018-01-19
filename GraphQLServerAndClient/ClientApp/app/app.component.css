@@ -1,4 +1,1 @@
-.mdl-button--fab {
-  height: 28px;
-  width: 28px;
-}
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

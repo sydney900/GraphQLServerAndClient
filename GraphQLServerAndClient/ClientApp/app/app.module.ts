@@ -6,13 +6,19 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './mat.module';
+
 
 import { AppComponent } from './app.component';
 import { CreateClientComponent } from './clients/create-client/create-client.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { ClientsListComponent } from './Clients/clients-list/clients-list.component';
 
 const appRoutes: Routes = [
-  { path: 'main', component: AppComponent, data: { title: 'Clients List' } },
+  { path: 'main', component: ClientsListComponent, data: { title: 'Clients List' } },
   { path: 'create-client', component: CreateClientComponent },
   {
     path: '',
@@ -27,7 +33,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     CreateClientComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ClientsListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       //{ enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    FormsModule,
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
