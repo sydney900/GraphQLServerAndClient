@@ -1,4 +1,4 @@
-# GraphQLServerAndClient
+# ASP.NET Core GraphQL server and angular GraphQL client
 
 ASP.NET Core GraphQL server and angular GraphQL client. 
 
