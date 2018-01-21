@@ -403,7 +403,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../ClientApp/app/common/page-not-found/page-not-found.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  The page you are look for are not found!\n</p>\n"
+module.exports = "<p>\r\n  The page you are look for are not found!\r\n</p>\r\n"
 
 /***/ }),
 

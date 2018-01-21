@@ -15,17 +15,37 @@ namespace GenericGraphQLService.GraphQL
     {
       Name = "Mutation";
 
+      //Field<ClientType>(
+      //    "addClient",
+      //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ClientInputType>> { Name = "clientInput" }),
+      //    resolve: context =>
+      //    {
+      //      var client = context.GetArgument<Client>("clientInput");
+      //      unitOfWork.Repository<Client>().Insert(client);
+      //      unitOfWork.SaveChanges();
+      //      return client;
+      //    }
+      //);
+
       Field<ClientType>(
           "addClient",
-          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ClientInputType>> { Name = "clientInput" }),
+          arguments: new QueryArguments(
+            new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "clientName" },
+            new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "clientPassword" },
+            new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "email" }
+          ),
           resolve: context =>
           {
-            var client = context.GetArgument<Client>("clientInput");
+            var clientName = context.GetArgument<string>("clientName");
+            var clientPassword = context.GetArgument<string>("clientPassword");
+            var email = context.GetArgument<string>("email");
+            var client = new Client { ClientName = clientName, ClientPassWord = clientPassword, Email = email };
             unitOfWork.Repository<Client>().Insert(client);
             unitOfWork.SaveChanges();
             return client;
           }
       );
+
 
       Field<ClientType>(
         "deleteClient",
@@ -41,14 +61,28 @@ namespace GenericGraphQLService.GraphQL
 
       Field<ProductType>(
           "addProduct",
-          arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ProductInputType>> { Name = "product" }),
+          arguments: new QueryArguments(
+            new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "name" }
+            ),
           resolve: context =>
           {
-            var product = context.GetArgument<Product>("id");
-            unitOfWork.Repository<Product>().Insert(product);
+            var productName = context.GetArgument<string>("name");
+            unitOfWork.Repository<Product>().Insert(new Product { Name= productName });
             return unitOfWork.SaveChanges();
           }
       );
+
+      //Field<ProductType>(
+      //    "addProduct",
+      //    arguments: new QueryArguments(new QueryArgument<NonNullGraphType<ProductInputType>> { Name = "product" }),
+      //    resolve: context =>
+      //    {
+      //      var product = context.GetArgument<Product>("id");
+      //      unitOfWork.Repository<Product>().Insert(product);
+      //      return unitOfWork.SaveChanges();
+      //    }
+      //);
+
 
       Field<ProductType>(
         "deleteProduct",

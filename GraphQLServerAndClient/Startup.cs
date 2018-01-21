@@ -67,9 +67,10 @@ namespace GenericGraphQLService
           .AllowAnyHeader()
           .AllowAnyMethod());
 
+      app.UseGraphiQl();
+
       app.UseDefaultFiles();
       app.UseStaticFiles();
-      app.UseGraphiQl();
 
       app.UseMvc(routes =>
       {
