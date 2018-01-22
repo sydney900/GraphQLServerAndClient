@@ -1,17 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Client } from '../../models/client';
-
-const mutation = gql`
-mutation AddClient($clientInput: ClientInput) {
-  addClient(clientInput: $clientInput) {
-     id
-     clientName
-  }
-}
-`;
+import gqlAddClient from '../../../clientGraphql/gqlAddClient';
+import gqlGetAllClients from '../../../clientGraphql/gqlQueryClients';
 
 
 @Component({
@@ -27,7 +21,7 @@ export class CreateClientComponent implements OnInit {
   //email: String;
   client: Client;
 
-  constructor(private fb: FormBuilder, private apollo: Apollo) { }
+  constructor(private fb: FormBuilder, private apollo: Apollo, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -57,14 +51,20 @@ export class CreateClientComponent implements OnInit {
 
   onSubmit(fClient) {
     this.apollo.mutate({
-      mutation: mutation,
+      mutation: gqlAddClient,
+      refetchQueries: [{ query: gqlGetAllClients }],
       variables: {
-        clientInput: {
-          clientName: fClient.clientName,
-          clientPassWord: fClient.clientPassword,
-          email: fClient.email
-        }
+        clientName: fClient.clientName,
+        clientPassword: fClient.clientPassword,
+        email: fClient.email
       }
-    });
+    })
+      .subscribe(({ data }) => {
+        //console.log('Created client: ', data);
+        //then navigate to main
+        this.router.navigate(["/main"]);
+      }, (error) => {
+        console.log('there was an error creating client', error);
+      });
   }
 }

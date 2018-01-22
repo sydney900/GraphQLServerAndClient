@@ -25,7 +25,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".mdl-button--fab {\r\n  height: 28px;\r\n  width: 28px;\r\n}\r\n", ""]);
+exports.push([module.i, "mat-card-title {\r\n  width: 100%;\r\n}\r\n\r\nmat-card-header > button {\r\n  float: right;\r\n}\r\n", ""]);
 
 // exports
 
@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../ClientApp/app/Clients/clients-list/clients-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div style=\"text-align:center\">\r\n  <h3>\r\n    Clients\r\n  </h3>\r\n</div>\r\n\r\n<mat-list>\r\n  <mat-list-item *ngFor=\"let entry of clients | async | select: 'clients'\">\r\n    <i class=\"material-icons\">person</i>\r\n    <div>\r\n      <h5 matLine>\r\n        {{entry.clientName}}\r\n      </h5>\r\n      <p matLine>\r\n        <span> {{entry.email}} </span>\r\n      </p>\r\n    </div>\r\n    <button (click)=\"onDeleteClient(entry.id)\">\r\n      <i class=\"material-icons\">delete</i>\r\n    </button>\r\n  </mat-list-item>\r\n</mat-list>\r\n\r\n<button (click)=\"onAddClient()\" mat-icon-button>\r\n  <i class=\"material-icons\">add</i>\r\n</button>\r\n\r\n\r\n"
+module.exports = "\r\n<div style=\"text-align:center\">\r\n  <h3>\r\n    Clients\r\n  </h3>\r\n</div>\r\n\r\n<mat-list>\r\n  <mat-card *ngFor=\"let entry of clients | async | select: 'clients'\">\r\n    <mat-card-header>\r\n      <div mat-card-avatar>\r\n        <i class=\"material-icons\">person</i>\r\n      </div>\r\n      <mat-card-title>{{entry.clientName}}</mat-card-title>\r\n      <button mat-mini-fab (click)=\"onDeleteClient(entry.id)\" color=\"primary\">\r\n        <mat-icon>delete</mat-icon>\r\n      </button>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n      <div>\r\n        Email: <span> {{entry.email}} </span>\r\n      </div>\r\n    </mat-card-content>\r\n  </mat-card>\r\n</mat-list>\r\n<div layout-algin=\"end center\">\r\n  <button (click)=\"onAddClient()\" mat-mini-fab>\r\n    <mat-icon>add</mat-icon>\r\n  </button>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -49,10 +49,9 @@ module.exports = "\r\n<div style=\"text-align:center\">\r\n  <h3>\r\n    Clients
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientsListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_apollo_angular__ = __webpack_require__("../../../../apollo-angular/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_graphql_tag__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__clientGraphql_gqlQueryClients__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlQueryClients.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__clientGraphql_gqlQueryClients__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlQueryClients.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__clientGraphql_gqlDeleteClient__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlDeleteClient.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -67,7 +66,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var mutation = (_a = ["\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id)\n}\n"], _a.raw = ["\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id)\n}\n"], __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default()(_a));
 var ClientsListComponent = (function () {
     function ClientsListComponent(apollo, router, route) {
         this.apollo = apollo;
@@ -76,7 +74,7 @@ var ClientsListComponent = (function () {
     }
     ClientsListComponent.prototype.ngOnInit = function () {
         this.clients = this.apollo.watchQuery({
-            query: __WEBPACK_IMPORTED_MODULE_4__clientGraphql_gqlQueryClients__["a" /* default */]
+            query: __WEBPACK_IMPORTED_MODULE_3__clientGraphql_gqlQueryClients__["a" /* default */]
         }).valueChanges;
         //this.apollo.watchQuery({
         //  query: QueryClientAndProduct,
@@ -98,11 +96,18 @@ var ClientsListComponent = (function () {
         //delete the client
         console.log("delete the client");
         this.apollo.mutate({
-            mutation: mutation,
+            mutation: __WEBPACK_IMPORTED_MODULE_4__clientGraphql_gqlDeleteClient__["a" /* default */],
+            refetchQueries: [{ query: __WEBPACK_IMPORTED_MODULE_3__clientGraphql_gqlQueryClients__["a" /* default */] }],
             variables: {
                 id: id
             }
+        }).subscribe(function (_a) {
+            var data = _a.data;
+            console.log('Deleted client: ', data);
+        }, function (error) {
+            console.log('there was an error deleting client', error);
         });
+        ;
     };
     ClientsListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -110,12 +115,11 @@ var ClientsListComponent = (function () {
             template: __webpack_require__("../../../../../ClientApp/app/Clients/clients-list/clients-list.component.html"),
             styles: [__webpack_require__("../../../../../ClientApp/app/Clients/clients-list/clients-list.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_apollo_angular__["a" /* Apollo */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_apollo_angular__["a" /* Apollo */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
     ], ClientsListComponent);
     return ClientsListComponent;
 }());
 
-var _a;
 
 
 /***/ }),
@@ -306,11 +310,12 @@ module.exports = "<form  class=\"clientform\" [formGroup]=\"clientForm\" (ngSubm
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreateClientComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_apollo_angular__ = __webpack_require__("../../../../apollo-angular/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_graphql_tag__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_apollo_angular__ = __webpack_require__("../../../../apollo-angular/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_client__ = __webpack_require__("../../../../../ClientApp/app/models/client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__clientGraphql_gqlAddClient__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlAddClient.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__clientGraphql_gqlQueryClients__ = __webpack_require__("../../../../../ClientApp/clientGraphql/gqlQueryClients.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -325,11 +330,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var mutation = (_a = ["\nmutation AddClient($clientInput: ClientInput) {\n  addClient(clientInput: $clientInput) {\n     id\n     clientName\n  }\n}\n"], _a.raw = ["\nmutation AddClient($clientInput: ClientInput) {\n  addClient(clientInput: $clientInput) {\n     id\n     clientName\n  }\n}\n"], __WEBPACK_IMPORTED_MODULE_2_graphql_tag___default()(_a));
+
+
 var CreateClientComponent = (function () {
-    function CreateClientComponent(fb, apollo) {
+    function CreateClientComponent(fb, apollo, router, route) {
         this.fb = fb;
         this.apollo = apollo;
+        this.router = router;
+        this.route = route;
     }
     CreateClientComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -355,15 +363,23 @@ var CreateClientComponent = (function () {
         });
     };
     CreateClientComponent.prototype.onSubmit = function (fClient) {
+        var _this = this;
         this.apollo.mutate({
-            mutation: mutation,
+            mutation: __WEBPACK_IMPORTED_MODULE_5__clientGraphql_gqlAddClient__["a" /* default */],
+            refetchQueries: [{ query: __WEBPACK_IMPORTED_MODULE_6__clientGraphql_gqlQueryClients__["a" /* default */] }],
             variables: {
-                clientInput: {
-                    clientName: fClient.clientName,
-                    clientPassWord: fClient.clientPassword,
-                    email: fClient.email
-                }
+                clientName: fClient.clientName,
+                clientPassword: fClient.clientPassword,
+                email: fClient.email
             }
+        })
+            .subscribe(function (_a) {
+            var data = _a.data;
+            //console.log('Created client: ', data);
+            //then navigate to main
+            _this.router.navigate(["/main"]);
+        }, function (error) {
+            console.log('there was an error creating client', error);
         });
     };
     CreateClientComponent = __decorate([
@@ -372,12 +388,11 @@ var CreateClientComponent = (function () {
             template: __webpack_require__("../../../../../ClientApp/app/clients/create-client/create-client.component.html"),
             styles: [__webpack_require__("../../../../../ClientApp/app/clients/create-client/create-client.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_apollo_angular__["a" /* Apollo */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_forms__["b" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_2_apollo_angular__["a" /* Apollo */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
     ], CreateClientComponent);
     return CreateClientComponent;
 }());
 
-var _a;
 
 
 /***/ }),
@@ -403,7 +418,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../ClientApp/app/common/page-not-found/page-not-found.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  The page you are look for are not found!\r\n</p>\r\n"
+module.exports = "<p>\n  The page you are look for are not found!\n</p>\n"
 
 /***/ }),
 
@@ -463,8 +478,8 @@ var MaterialModule = (function () {
     }
     MaterialModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatListModule */]],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatListModule */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatCardModule */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MatButtonModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["e" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["c" /* MatFormFieldModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatIconModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["f" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_1__angular_material__["b" /* MatCardModule */]],
         })
     ], MaterialModule);
     return MaterialModule;
@@ -489,6 +504,32 @@ var Client = (function () {
     return Client;
 }());
 
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/clientGraphql/gqlAddClient.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_graphql_tag__);
+
+/* harmony default export */ __webpack_exports__["a"] = (_a = ["\nmutation AddClient($clientName:String!, $clientPassword:String!, $email:String!) {\n  addClient(clientName: $clientName, clientPassword:$clientPassword, email:$email) {\n     id\n     clientName\n  }\n}\n"], _a.raw = ["\nmutation AddClient($clientName:String!, $clientPassword:String!, $email:String!) {\n  addClient(clientName: $clientName, clientPassword:$clientPassword, email:$email) {\n     id\n     clientName\n  }\n}\n"], __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default()(_a));
+var _a;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/clientGraphql/gqlDeleteClient.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag__ = __webpack_require__("../../../../graphql-tag/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_graphql_tag__);
+
+/* harmony default export */ __webpack_exports__["a"] = (_a = ["\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id) {\n    id\n  }\n}"], _a.raw = ["\nmutation DeleteClient($id: Int!) {\n  deleteClient(id: $id) {\n    id\n  }\n}"], __WEBPACK_IMPORTED_MODULE_0_graphql_tag___default()(_a));
+var _a;
 
 
 /***/ }),

@@ -5,13 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import QueryClientAndProduct from '../../../clientGraphql/gqlQueryClientAndProduct';
-import QueryClients from '../../../clientGraphql/gqlQueryClients';
-
-const mutation = gql`
-mutation DeleteClient($id: Int!) {
-  deleteClient(id: $id)
-}
-`;
+import gqlGetAllClients from '../../../clientGraphql/gqlQueryClients';
+import gqlDeleteClient from '../../../clientGraphql/gqlDeleteClient';
 
 @Component({
   selector: 'app-clients-list',
@@ -27,7 +22,7 @@ export class ClientsListComponent implements OnInit {
 
   ngOnInit() {
     this.clients = this.apollo.watchQuery({
-      query: QueryClients
+      query: gqlGetAllClients
     }).valueChanges;
 
     //this.apollo.watchQuery({
@@ -55,11 +50,16 @@ export class ClientsListComponent implements OnInit {
     console.log("delete the client");
 
     this.apollo.mutate({
-      mutation: mutation,
+      mutation: gqlDeleteClient,
+      refetchQueries: [{ query: gqlGetAllClients }],
       variables: {
         id: id
       }
-    });
+    }).subscribe(({ data }) => {
+        console.log('Deleted client: ', data);
+    }, (error) => {
+      console.log('there was an error deleting client', error);
+    });;
   }
 
 }

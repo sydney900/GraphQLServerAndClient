@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 exports.i(__webpack_require__("../../../../css-loader/index.js?{\"sourceMap\":false,\"importLoaders\":1}!../../../../postcss-loader/lib/index.js?{\"ident\":\"postcss\",\"sourceMap\":false}!../../../material/prebuilt-themes/indigo-pink.css"), "");
 
 // module
-exports.push([module.i, "/*.ng-valid[required], .ng-valid.required {\r\n  border-left: 5px solid #42A948;\r\n}\r\n\r\n.ng-invalid:not(form) {\r\n  border-left: 5px solid #a94442;\r\n}*/\r\n", ""]);
+exports.push([module.i, "/*.ng-valid[required], .ng-valid.required {\r\n  border-left: 5px solid #42A948;\r\n}\r\n\r\n.ng-invalid:not(form) {\r\n  border-left: 5px solid #a94442;\r\n}*/\r\n\r\ndiv.mat-card-header-text {\r\n  width: 100%;\r\n}\r\n", ""]);
 
 // exports
 

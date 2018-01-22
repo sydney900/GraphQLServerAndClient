@@ -7,3 +7,7 @@
 .ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }*/
+
+div.mat-card-header-text {
+  width: 100%;
+}

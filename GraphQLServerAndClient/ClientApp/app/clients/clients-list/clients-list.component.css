@@ -1,4 +1,7 @@
-.mdl-button--fab {
-  height: 28px;
-  width: 28px;
+mat-card-title {
+  width: 100%;
+}
+
+mat-card-header > button {
+  float: right;
 }

@@ -6,24 +6,27 @@
 </div>
 
 <mat-list>
-  <mat-list-item *ngFor="let entry of clients | async | select: 'clients'">
-    <i class="material-icons">person</i>
-    <div>
-      <h5 matLine>
-        {{entry.clientName}}
-      </h5>
-      <p matLine>
-        <span> {{entry.email}} </span>
-      </p>
-    </div>
-    <button (click)="onDeleteClient(entry.id)">
-      <i class="material-icons">delete</i>
-    </button>
-  </mat-list-item>
+  <mat-card *ngFor="let entry of clients | async | select: 'clients'">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <i class="material-icons">person</i>
+      </div>
+      <mat-card-title>{{entry.clientName}}</mat-card-title>
+      <button mat-mini-fab (click)="onDeleteClient(entry.id)" color="primary">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        Email: <span> {{entry.email}} </span>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </mat-list>
-
-<button (click)="onAddClient()" mat-icon-button>
-  <i class="material-icons">add</i>
-</button>
+<div layout-algin="end center">
+  <button (click)="onAddClient()" mat-mini-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 
 
