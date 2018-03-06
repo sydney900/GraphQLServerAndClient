@@ -1,0 +1,23 @@
+FROM microsoft/aspnetcore-build AS net-builer
+WORKDIR /src
+COPY ./GraphQLServerAndClient.sln .
+WORKDIR /src/GenericUnitOfWorkDll
+COPY ./GenericUnitOfWorkDll .
+WORKDIR /src/GraphQLServerAndClient
+COPY ./GraphQLServerAndClient/appsettings.json .
+COPY ./GraphQLServerAndClient/GraphQLServerAndClient.csproj .
+COPY ./GraphQLServerAndClient/Program.cs .
+COPY ./GraphQLServerAndClient/Startup.cs .
+WORKDIR /src/GraphQLServerAndClient/Controllers
+COPY ./GraphQLServerAndClient/Controllers .
+WORKDIR /src/GraphQLServerAndClient/GraphQL
+COPY ./GraphQLServerAndClient/GraphQL .
+WORKDIR /src
+RUN dotnet restore
+RUN dotnet publish -c Release -o /serverapp
+
+FROM microsoft/aspnetcore:2.0
+WORKDIR /app
+EXPOSE 80
+COPY --from=net-builer /serverapp .
+ENTRYPOINT dotnet graphqlserverandclient.dll

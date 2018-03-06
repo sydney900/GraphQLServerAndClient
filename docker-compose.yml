@@ -1,0 +1,29 @@
+version: '2.1'
+
+services:
+  graphqlserver:
+    image: graphqlserver
+    build: 
+      context: .
+      dockerfile: DockerfileServer
+    depends_on:
+      - db      
+    environment:
+      # DatabaseServer: "db"
+      # DatabaseName: "mydb"
+      DatabaseUser: "sa"
+      DatabaseUserPassword: "itisme"
+
+  graphqlclient:
+    image: graphqlclient
+    build: 
+      context: .
+      dockerfile: DockerfileWebSite
+
+  db:
+    image: "microsoft/mssql-server-linux"
+    ports: 
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "itisme"
+      ACCEPT_EULA: "Y"      

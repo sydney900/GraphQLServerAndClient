@@ -15,7 +15,7 @@ import { MaterialModule } from './mat.module';
 import { AppComponent } from './app.component';
 import { CreateClientComponent } from './clients/create-client/create-client.component';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
-import { ClientsListComponent } from './Clients/clients-list/clients-list.component';
+import { ClientsListComponent } from './clients/clients-list/clients-list.component';
 
 const appRoutes: Routes = [
   { path: 'main', component: ClientsListComponent, data: { title: 'Clients List' } },
