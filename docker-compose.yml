@@ -1,16 +1,14 @@
-version: '2.1'
+version: '3'
 
 services:
   graphqlserver:
     image: graphqlserver
     build: 
       context: .
-      dockerfile: DockerfileServer
+      dockerfile: GraphQLServerAndClient/DockerfileServer
     depends_on:
       - db      
     environment:
-      # DatabaseServer: "db"
-      # DatabaseName: "mydb"
       DatabaseUser: "sa"
       DatabaseUserPassword: "itisme"
 
@@ -18,7 +16,7 @@ services:
     image: graphqlclient
     build: 
       context: .
-      dockerfile: DockerfileWebSite
+      dockerfile: GraphQLServerAndClient/DockerfileWebSite
 
   db:
     image: "microsoft/mssql-server-linux"

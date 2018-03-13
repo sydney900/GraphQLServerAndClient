@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  graphqlserver:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+  graphqlclient:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
