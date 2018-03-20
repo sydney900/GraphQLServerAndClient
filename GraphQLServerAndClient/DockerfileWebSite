@@ -5,7 +5,6 @@ COPY ./GraphQLServerAndClient/default.conf GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/karma.conf.js GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/npm-shrinkwrap.json GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/package.json GraphQLServerAndClient/
-COPY ./GraphQLServerAndClient/package-lock.json GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/protractor.conf.js GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/tsconfig.json GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/tslint.json GraphQLServerAndClient/
@@ -13,7 +12,7 @@ COPY ./GraphQLServerAndClient/ClientApp/ GraphQLServerAndClient/ClientApp/
 WORKDIR /src/GraphQLServerAndClient
 RUN apk update && apk upgrade && apk add --no-cache bash git openssh
 RUN npm install
-RUN npm run build:prod
+RUN npm run build
 
 FROM nginx:1.13.9-alpine
 COPY --from=builder /src/GraphQLServerAndClient/default.conf /etc/nginx/conf.d/

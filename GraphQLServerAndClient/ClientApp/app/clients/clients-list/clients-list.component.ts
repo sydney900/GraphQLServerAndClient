@@ -59,7 +59,7 @@ export class ClientsListComponent implements OnInit {
         console.log('Deleted client: ', data);
     }, (error) => {
       console.log('there was an error deleting client', error);
-    });;
+    });
   }
 
 }

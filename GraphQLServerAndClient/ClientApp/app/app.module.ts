@@ -62,7 +62,7 @@ export class AppModule {
       // By default, this client will send queries to the
       // `/graphql` endpoint on the same host
       //link: httpLink.create({ uri: 'http://localhost:62001/graphql/' }),
-	  link: httpLink.create({ uri: 'http://192.168.99.100:62002/graphql/' }),	  
+	    link: httpLink.create({ uri: 'http://192.168.99.100:62002/graphql/' }),	  
       cache: new InMemoryCache()
     });
   }  

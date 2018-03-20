@@ -13,6 +13,10 @@ services:
     environment:
       DatabaseUser: "sa"
       DatabaseUserPassword: "Itisme@09"
+    networks: 
+      sydney900:
+        aliases: 
+          - website.bingnet      
 
   graphqlclient:
     image: graphqlclient
@@ -21,6 +25,10 @@ services:
       dockerfile: GraphQLServerAndClient/DockerfileWebSite
     ports: 
       - "62001:80"
+    networks: 
+      sydney900:
+        aliases: 
+          - web.bingnet
 
   db:
     image: "microsoft/mssql-server-linux"
@@ -31,6 +39,13 @@ services:
     environment:
       SA_PASSWORD: "Itisme@09"
       ACCEPT_EULA: "Y"
+    networks: 
+      sydney900:
+        aliases: 
+          - db.bingnet   
+networks:
+  sydney900:
+    driver: bridge 
 
 volumes:
   mssql-server-linux-data:      
