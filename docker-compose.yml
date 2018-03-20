@@ -6,22 +6,31 @@ services:
     build: 
       context: .
       dockerfile: GraphQLServerAndClient/DockerfileServer
+    ports: 
+      - "62002:80"
     depends_on:
       - db      
     environment:
       DatabaseUser: "sa"
-      DatabaseUserPassword: "itisme"
+      DatabaseUserPassword: "Itisme@09"
 
   graphqlclient:
     image: graphqlclient
     build: 
       context: .
       dockerfile: GraphQLServerAndClient/DockerfileWebSite
+    ports: 
+      - "62001:80"
 
   db:
     image: "microsoft/mssql-server-linux"
+    volumes:
+      - mssql-server-linux-data:/var/opt/mssql/data
     ports: 
       - "1433:1433"
     environment:
-      SA_PASSWORD: "itisme"
-      ACCEPT_EULA: "Y"      
+      SA_PASSWORD: "Itisme@09"
+      ACCEPT_EULA: "Y"
+
+volumes:
+  mssql-server-linux-data:      
