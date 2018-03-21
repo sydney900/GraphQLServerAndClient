@@ -5,6 +5,7 @@ COPY ./GraphQLServerAndClient/default.conf GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/karma.conf.js GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/npm-shrinkwrap.json GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/package.json GraphQLServerAndClient/
+# COPY ./GraphQLServerAndClient/package-lock.json GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/protractor.conf.js GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/tsconfig.json GraphQLServerAndClient/
 COPY ./GraphQLServerAndClient/tslint.json GraphQLServerAndClient/
